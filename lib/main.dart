@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_management/Screens/login_screen.dart';
 import 'package:hostel_management/Screens/signup_screen.dart';
 
+import 'Screens/home_screen.dart';
 import 'firebase_options.dart';
 
  Future<void>  main() async {
@@ -42,8 +45,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Signup()
-    );
+    home: StreamBuilder<User?>(
+    stream: FirebaseAuth.instance.authStateChanges(),
+    builder: (context, snapshot) {
+    if (snapshot.hasData) {
+    // User is signed in
+      if (kDebugMode) {
+        print(snapshot.data.toString());
+      }
+    return HomeScreen();
+    } else {
+    // User is signed out
+    return LoginScreen();
+    }
+    },
+    ));
   }
 }
 

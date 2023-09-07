@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^4.9.1
   firebase_auth: ^4.9.0
   fluttertoast: ^8.2.2
+  url_launcher: ^6.1.5
+  call_log: ^4.0.0
 
 dev_dependencies:
   flutter_test:

@@ -38,7 +38,13 @@ class _SignupState extends State<Signup> {
 
     FirebaseStoreImpl fires = FirebaseStoreImpl();
     String sa = await fires.addUser(a);
-    print(sa);
+  fires.getUsers();
+
+
+    showDialog(context: context, builder:(ctx)=>AboutDialog(children: [Text("added suceesfully")],));
+
+    Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen()));
+
 
 
   }
@@ -216,5 +222,13 @@ class _SignupState extends State<Signup> {
           type: StepperType.horizontal,
           physics: ScrollPhysics()),
     );
+  }
+
+  @override
+  void initState() {
+    FirebaseStoreImpl fire = FirebaseStoreImpl();
+    fire.getUsers();
+
+    super.initState();
   }
 }

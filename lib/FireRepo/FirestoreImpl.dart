@@ -2,7 +2,7 @@
 
 
 import 'dart:convert';
-import 'dart:js_interop';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -25,7 +25,7 @@ class FirebaseStoreImpl
             {
                 String Json = jsonEncode(user);
                 Map<String, dynamic> userMap = jsonDecode(Json);
-          await  firestoreOne.collection("user").add(user.toJS).then((value) => {
+          await  firestoreOne.collection("user").add(user.toJson()).then((value) => {
               print("added")
 
           });
@@ -40,6 +40,29 @@ class FirebaseStoreImpl
 
 
     }
+
+    void getUsers()
+    {
+    List<UserInput> user = [];
+    FirebaseFirestore.instance
+        .collection('user')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      String Json = jsonEncode(doc.data());
+      Map<String, dynamic> userMap = jsonDecode(Json);
+
+      UserInput a = UserInput.fromJson(userMap);
+      user.add(a);
+
+    });
+
+    });
+    print(user.toString());
+
+
+
+}
 
 
 }

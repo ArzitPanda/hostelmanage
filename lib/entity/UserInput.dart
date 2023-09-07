@@ -64,15 +64,31 @@ class UserInput
     _name = value;
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'mail':mail,
-
-    };
+  factory UserInput.fromJson(Map<String, dynamic> json) {
+    return UserInput(
+      json["_name"],
+     json["_password"],
+     json["_mail"],
+    json["_parents_mobile"],
+      json["_address"],
+     json["_branch"],
+     int.parse(json["_year"]),
+      int.parse(json["_hostel_name"]),
+       int.parse(json["room_no"]),
+    );
   }
 
-
-
-
+  Map<String, dynamic> toJson() {
+    return {
+      "_name": this._name,
+      "_password": this._password,
+      "_mail": this._mail,
+      "_parents_mobile": this._parents_mobile,
+      "_address": this._address,
+      "_branch": this._branch,
+      "_year": this._year,
+      "_hostel_name": this._hostel_name,
+      "room_no": this.room_no,
+    };
+  }
 }

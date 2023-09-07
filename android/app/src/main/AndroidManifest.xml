@@ -1,4 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <application
         android:label="hostel_management"
         android:name="${applicationName}"
